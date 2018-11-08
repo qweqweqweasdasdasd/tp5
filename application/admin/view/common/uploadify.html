@@ -1,0 +1,27 @@
+<!-- 上传插件 -->
+<link rel="stylesheet" type="text/css" href="/static/hadmin/uploadify/uploadify.css" />
+<script type="text/javascript" src="/static/hadmin/uploadify/jquery.uploadify.min.js"></script>
+<!-- 上传插件 -->
+<script type="text/javascript">			
+	$("#file_upload").uploadify({				
+        'swf': '/static/hadmin/uploadify/uploadify.swf',
+        'uploader': '{:url("image/upload")}',
+        'buttonText': '选择图片',
+        'fileTypeDesc'  : 'All Files',
+        'fileObjName'   : 'file',
+        'fileTypeExts'  : '*.jpg;*.jpge;*.gif;*.psd;*.png;*.txt;*.doc;*.docx;*.ppt;*.pptx;*.pdf',
+        'method': 'psot',
+        'onUploadSuccess' : function(file, data, response) { //上传成功	
+        	//上传成功
+        	if(response){
+        		var obj = JSON.parse(data);
+        		if(obj.code == 1){
+        			$('img').attr('src',obj.data.path);
+        			$('input[type="hidden"]').attr('value',obj.data.path);
+        
+        		}
+        		console.log(obj);
+        	}
+        }
+    });
+</script>
